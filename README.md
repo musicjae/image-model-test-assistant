@@ -4,4 +4,7 @@
 2. ```git clone https://github.com/musicjae/image-model-test-assistant.git```
 3. ```pip install -r requirements.txt```
 4. 실행 ```python main.py ```
-5. 사용 방법: (1) images 폴더에 이미지를 넣은 뒤, 프로그램을 실행하여 images  선택, (2) 사진 파일명 선택, (3) pass/fail 누를 시, 해당 사진이 pass/fail 폴더로 이동
+5. 사용 방법
+ (1) images 폴더에 이미지를 넣은 뒤, 프로그램을 실행하여 images  선택 
+ (2) 사진 파일명 선택
+ (3) pass/fail 누를 시, 해당 사진이 pass/fail 폴더로 이동
