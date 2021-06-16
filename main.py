@@ -5,8 +5,8 @@ import PIL.Image
 import io
 import base64
 import shutil
-
-
+from apilist import loadapi
+from setting import args
 
 def convert_to_bytes(file_or_bytes, resize=None,passs=None,fail=None):
 
@@ -35,14 +35,17 @@ left_col = [[sg.Text('Folder'), sg.In(size=(25,1), enable_events=True ,key='-FOL
 # For now will only show the name of the file that was chosen
 images_col = [[sg.Text('You choose from the list:')],
               [sg.Text(size=(40,1), key='-TOUT-')],
-              [sg.Image(key='-IMAGE-')]]
+              [sg.Image(key='-IMAGE-')],
+              [sg.Button('check',key='check',size=(10,5))],
+              [sg.Text('결과: ',size=(40,10),key='result',font=("Helvetica", 25))]]
 
 # ----- Full layout -----
 layout = [[sg.Column(left_col, element_justification='c'), sg.VSeperator(),sg.Column(images_col, element_justification='c')],
-          [sg.Button('Pass'),sg.Button('fail'),sg.Button('Exit')]]
+          [sg.Button('Pass'),sg.Button('fail'),sg.Button('Exit')]
+          ]
 
 # --------------------------------- Create Window ---------------------------------
-window = sg.Window('Image Model test assistant in Dangamsoft', layout,resizable=True)
+window = sg.Window('Image Model test assistant in Dangamsoft', layout, resizable=True)
 
 # ----- Run the Event Loop -----
 # --------------------------------- Event Loop ---------------------------------
@@ -92,8 +95,11 @@ while True:
         dir = 'fail/'
         shutil.move(src+filename,dir+filename)
 
+    elif event == 'check':
+        filename = filename_
+        result = loadapi(imgpath='images/'+filename, port=args.p)
+        print(result)
+        window['result'].update(result)
+
 # --------------------------------- Close & Exit ---------------------------------
-
-
-
 window.close()
